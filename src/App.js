@@ -25,7 +25,7 @@ function App() {
     setSelected(selected.filter((sel) => sel.name !== char.name));
 
     if (char.type.includes("Негативная черта")) {
-      setPoints(points - 1); // Removing a flaw decreases points by 1
+      setPoints(points - char.cost); // Removing a flaw decreases points by 1
     } else if (char.type === "Положительная черта" || char.type === "Магия") {
       setPoints(points + 2); // Removing an edge or power refunds 2 points
     }

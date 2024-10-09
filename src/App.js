@@ -39,6 +39,11 @@ function App() {
     return "secondary"; // Default color
   };
 
+  // Function to determine if a characteristic is selected
+  const isSelected = (char) => {
+    return selected.find((sel) => sel.name === char.name);
+  };
+
   return (
     <Container className="bg-dark text-white min-vh-100 py-5">
       <h1 className="text-center mb-5">Создание персонажа</h1>
@@ -56,28 +61,31 @@ function App() {
         {selected.length === 0 ? (
           <p>Характеристик пока нет.</p>
         ) : (
-          selected.map((char, index) => (
-            <Card 
-              key={index} 
-              bg={getColorForType(char.type)} // Apply background color based on type
-              text="white" 
-              className="mb-3"
-            >
-              <Card.Body>
-                <Card.Title>{char.name}</Card.Title>
-                <Card.Text>{char.description}</Card.Text>
-                <Card.Text>
-                  <strong>Требования:</strong> {char.prerequisites}
-                </Card.Text>
-                <Card.Text>
-                  <strong>Тип:</strong> {char.type}
-                </Card.Text>
-                <Button variant="light" onClick={() => handleRemove(char)}>
-                  Remove
-                </Button>
-              </Card.Body>
-            </Card>
-          ))
+          <Row>
+            {selected.map((char, index) => (
+              <Col md={6} key={index} className="mb-3"> {/* Display in 2 columns */}
+                <Card 
+                  bg={getColorForType(char.type)} // Apply background color based on type
+                  text="white"
+                  className="mb-3"
+                >
+                  <Card.Body>
+                    <Card.Title>{char.name}</Card.Title>
+                    <Card.Text>{char.description}</Card.Text>
+                    <Card.Text>
+                      <strong>Требования:</strong> {char.prerequisites}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Тип:</strong> {char.type}
+                    </Card.Text>
+                    <Button variant="light" onClick={() => handleRemove(char)}>
+                      Remove
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
         )}
       </Row>
 
@@ -90,7 +98,7 @@ function App() {
             {edges.map((char, index) => (
               <Col xs={6} md={6} lg={6} className="mb-3" key={index}>
                 <Button
-                  variant="outline-light"
+                  variant={isSelected(char) ? getColorForType(char.type) : "outline-light"} // Highlight selected edges
                   onClick={() => handleSelect(char)}
                   className="w-100 text-start"
                 >
@@ -108,7 +116,7 @@ function App() {
             {flaws.map((char, index) => (
               <Col xs={6} md={6} lg={6} className="mb-3" key={index}>
                 <Button
-                  variant="outline-light"
+                  variant={isSelected(char) ? getColorForType(char.type) : "outline-light"} // Highlight selected flaws
                   onClick={() => handleSelect(char)}
                   className="w-100 text-start"
                 >
@@ -126,7 +134,7 @@ function App() {
             {powers.map((char, index) => (
               <Col xs={6} md={6} lg={6} className="mb-3" key={index}>
                 <Button
-                  variant="outline-light"
+                  variant={isSelected(char) ? getColorForType(char.type) : "outline-light"} // Highlight selected powers
                   onClick={() => handleSelect(char)}
                   className="w-100 text-start"
                 >

@@ -84,7 +84,7 @@ function App() {
       {/* Table Layout for Characteristics */}
       <Row>
         {/* Edges */}
-        <Col md={4}>
+        <Col md={4} className="mb-5 px-md-4">
           <h4 className="text-center">Положительные черты</h4>
           <Row>
             {edges.map((char, index) => (
@@ -102,7 +102,7 @@ function App() {
         </Col>
 
         {/* Flaws */}
-        <Col md={4}>
+        <Col md={4} className="mb-5 px-md-4">
           <h4 className="text-center">Отрицательные черты</h4>
           <Row>
             {flaws.map((char, index) => (
@@ -120,7 +120,7 @@ function App() {
         </Col>
 
         {/* Powers */}
-        <Col md={4}>
+        <Col md={4} className="mb-5 px-md-4">
           <h4 className="text-center">Силы</h4>
           <Row>
             {powers.map((char, index) => (

@@ -371,7 +371,7 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "Любит доминировать над противником, всегда бросает вызов самому сильному врагу в бою.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Плохое зрение",
@@ -385,7 +385,7 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "Персонаж начинает с одним бенни меньше за сессию.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Болтун",
@@ -399,14 +399,14 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "–6 к любым задачам, требующим зрения (но можно выбрать одну черту для компенсации).",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Кровожадный",
        type: "Негативная черта (Major)",
        description: "Никогда не берёт пленных.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Не умеет плавать",
@@ -427,28 +427,28 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "–1 к броскам на Общие знания и Внимательность.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Неуклюжий",
        type: "Негативная черта (Major)",
        description: "–2 к броскам на Атлетику и Скрытность.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Кодекс чести",
        type: "Негативная черта (Major)",
        description: "Персонаж держит своё слово и ведёт себя как джентльмен.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Любопытный",
        type: "Негативная черта (Major)",
        description: "Персонаж хочет узнать всё о чём угодно.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Желание смерти",
@@ -483,7 +483,7 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "–1 к Шагу, Ловкости, Силе и Выносливости, но герой получает 5 дополнительных очков навыков.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Враг",
@@ -518,7 +518,7 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "Персонаж всегда помогает тем, кто в беде.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Нерешительный",
@@ -539,7 +539,7 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "Герой действует, не думая.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Завистливый",
@@ -574,7 +574,7 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "Персонаж не может говорить и получает –2 к броскам, требующим устного общения.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Ожирение",
@@ -595,14 +595,14 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "–4 к задачам (например, Атлетика), требующим двух рук.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Один глаз",
        type: "Негативная черта (Major)",
        description: "–2 к действиям на дистанции 5\" (10 ярдов) и более.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Чужак",
@@ -616,7 +616,7 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "Герой уверен, что может всё.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Пацифист",
@@ -707,7 +707,7 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "Персонаж часто путает слова или не может их произнести. –1 к броскам на Запугивание, Убеждение и Насмешку.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Некрасивый",
@@ -742,7 +742,7 @@ export const powers = [
        type: "Негативная черта (Major)",
        description: "–2 к броскам на Страх и сопротивление Запугиванию.",
        prerequisites: "Без пререквизитов",
-       cost: 1
+       cost: 2
     },
     {
        name: "Юный",
@@ -785,7 +785,7 @@ export const powers = [
     {
       name: "Магический дар",
       type: "Положительная черта",
-      description: "Позволяет получить доступ к магическим способностям.",
+      description: "Позволяет получить доступ к магическим способностям. Дает 2 магические силы бесплатно.",
       prerequisites: "Без пререквизитов",
       cost: -2
     },

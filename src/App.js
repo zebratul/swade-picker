@@ -14,7 +14,7 @@ function App() {
     setSelected([...selected, char]);
 
     if (char.type.includes("Негативная черта")) {
-      setPoints(points + 1); // Flaws give +1 point
+      setPoints(points + char.cost); // Flaws give +1 point
     } else if (char.type === "Положительная черта" || char.type === "Магия") {
       setPoints(points - 2); // Edges and Powers cost 2 points
     }

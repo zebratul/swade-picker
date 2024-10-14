@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Button, Card, Badge } from "react-bootstrap";
-import { edges, flaws, powers } from './Characteristics.js'; 
+import { Container, Row, Col, Button, Card, Badge, Dropdown, DropdownButton } from "react-bootstrap";
+import { edges, flaws, powers, archetypes } from './Characteristics.js'; 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [selected, setSelected] = useState([]);
   const [points, setPoints] = useState(0);
+  const [selectedArchetype, setSelectedArchetype] = useState(null); // For archetype selection
 
   // Handle selecting a characteristic
   const handleSelect = (char) => {
@@ -31,6 +32,11 @@ function App() {
     }
   };
 
+  // Handle selecting an archetype
+  const handleArchetypeSelect = (archetype) => {
+    setSelectedArchetype(archetype);
+  };
+
   // Function to get color based on characteristic type
   const getColorForType = (type) => {
     if (type.includes("Положительная черта")) return "success"; // Green for Edges
@@ -47,6 +53,26 @@ function App() {
   return (
     <Container className="bg-dark text-white min-vh-100 py-5">
       <h1 className="text-center mb-5">Создание персонажа</h1>
+
+      {/* Archetype Dropdown */}
+      <div className="mb-4 text-center">
+        <DropdownButton id="dropdown-archetypes" title={selectedArchetype ? selectedArchetype.name : "Выбрать архетип"}>
+          {archetypes.map((archetype, index) => (
+            <Dropdown.Item 
+              key={index} 
+              onClick={() => handleArchetypeSelect(archetype)}
+            >
+              {archetype.name}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
+
+        {selectedArchetype && (
+          <p className="mt-3">
+            <strong>Архетип: </strong> {selectedArchetype.description}
+          </p>
+        )}
+      </div>
 
       {/* Display points */}
       <div className="mb-3 text-center">

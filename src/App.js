@@ -26,7 +26,7 @@ function App() {
     "Безумная наука": "d0",
     "Верховая езда": "d0",
     "Вера (для священников, шаманов и вудуистов)": "d0",
-    "Взлом (замки етц)": "d0",
+    "Взлом (замков етц)": "d0",
     Внимание: "d0",
     Вождение: "d0",
     Выживание: "d0",
@@ -132,10 +132,10 @@ function App() {
       {/* Points Display */}
       <Row className="text-center mb-3">
         <Col>
-          <h4>Очки навыков: <Badge bg="warning">{skillPoints}</Badge></h4>
+          <h4>Очки навыков: <Badge bg="info">{skillPoints}</Badge></h4>
         </Col>
         <Col>
-          <h4>Очки статов: <Badge bg="warning">{statPoints}</Badge></h4>
+          <h4>Очки статов: <Badge bg="info">{statPoints}</Badge></h4>
         </Col>
       </Row>
 

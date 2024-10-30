@@ -654,13 +654,6 @@ export const powers = [
         cost: 1
      },
      {
-        name: "Неграмотность",
-        type: "Негативная черта (Minor)",
-        description: "Персонаж не умеет читать и писать.",
-        prerequisites: "Без пререквизитов",
-        cost: 1
-     },
-     {
         name: "Импульсивный",
         type: "Негативная черта (Major)",
         description: "Герой действует, не думая.",

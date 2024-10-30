@@ -2,11 +2,66 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button, Card, Badge, Dropdown, DropdownButton } from "react-bootstrap";
 import { edges, flaws, powers, archetypes } from './Characteristics.js'; 
 import "bootstrap/dist/css/bootstrap.min.css";
+import StatSelector from './StatSelector';
+import SkillSelector from './SkillSelector';
 
 function App() {
   const [selected, setSelected] = useState([]);
   const [points, setPoints] = useState(0);
+  const [statPoints, setStatPoints] = useState(5); // Stat increase points
+  const [skillPoints, setSkillPoints] = useState(15); // Skill increase points
   const [selectedArchetype, setSelectedArchetype] = useState(null); // For archetype selection
+
+  const [stats, setStats] = useState({
+    Ловкость: "d4",
+    Смекалка: "d4",
+    Характер: "d4",
+    Сила: "d4",
+    Выносливость: "d4",
+  });
+
+  const [skills, setSkills] = useState({
+    "Атлетика (плаванье, бег етц)": "d0",
+    "Азартные игры": "d0",
+    "Безумная наука": "d0",
+    "Верховая езда": "d0",
+    "Вера (для священников, шаманов и вудуистов)": "d0",
+    "Взлом (замки етц)": "d0",
+    Внимание: "d0",
+    Вождение: "d0",
+    Выживание: "d0",
+    Выслеживание: "d0",
+    Выступление: "d0",
+    Драка: "d0",
+    Запугивание: "d0",
+    Лечение: "d0",
+    "Магия (для Картёжников)": "d0",
+    "Маскировка (стелс, кражи етц)": "d0",
+    Метание: "d0",
+    "Общедоступные знания": "d0",
+    "Специальные знания (сферы наук, языки, етц)": "d0",
+    "Оккультные знания": "d0",
+    Провокация: "d0",
+    "Расследование (работа с данными)": "d0",
+    Ремонт: "d0",
+    "Ремесло (старатель, фермер етц)": "d0",
+    Стрельба: "d0",
+    "Управление лодкой": "d0",
+    Убеждение: "d0",
+    "Уличное чутьё": "d0",
+  });
+
+  const updateStat = (stat, newValue) => setStats({ ...stats, [stat]: newValue });
+  const updateSkill = (skill, newValue) => setSkills({ ...skills, [skill]: newValue });
+
+  // Function to remove all skills at "d0"
+  const removeUnusedSkills = () => {
+    const filteredSkills = Object.keys(skills).reduce((result, skill) => {
+      if (skills[skill] !== "d0") result[skill] = skills[skill];
+      return result;
+    }, {});
+    setSkills(filteredSkills);
+  };
 
   // Handle selecting a characteristic
   const handleSelect = (char) => {
@@ -52,10 +107,10 @@ function App() {
 
   return (
     <Container className="bg-dark text-white min-vh-100 py-5">
-      <h1 className="text-center mb-5">Создание персонажа</h1>
+      <h1 className="text-center mb-5">Создание персонажа Deadlands</h1>
 
       {/* Archetype Dropdown */}
-      <div className="mb-4 text-center">
+      <div className="mb-5 text-center">
         <DropdownButton id="dropdown-archetypes" title={selectedArchetype ? selectedArchetype.name : "Выбрать архетип"}>
           {archetypes.map((archetype, index) => (
             <Dropdown.Item 
@@ -74,18 +129,67 @@ function App() {
         )}
       </div>
 
+      {/* Points Display */}
+      <Row className="text-center mb-3">
+        <Col>
+          <h4>Очки навыков: <Badge bg="warning">{skillPoints}</Badge></h4>
+        </Col>
+        <Col>
+          <h4>Очки статов: <Badge bg="warning">{statPoints}</Badge></h4>
+        </Col>
+      </Row>
+
+      {/* Stat and Skill Selection */}
+      <Row className="mb-5">
+        {/* Skill Selector Column */}
+        <Col md={6}>
+          <h4 className="text-center">Навыки</h4>
+          {Object.keys(skills).map((skill) => (
+            <SkillSelector
+              key={skill}
+              skill={skill}
+              value={skills[skill]}
+              skillPoints={skillPoints}
+              setSkillPoints={setSkillPoints}
+              updateSkill={updateSkill}
+            />
+          ))}
+          {/* Remove unused skills button */}
+          <div className="text-center mt-3">
+            <Button variant="outline-danger" onClick={removeUnusedSkills}>
+              Скрыть навыки с уровнем d0
+            </Button>
+          </div>
+        </Col>
+
+        {/* Stat Selector Column */}
+        <Col md={6}>
+          <h4 className="text-center">Статы</h4>
+          {Object.keys(stats).map((stat) => (
+            <StatSelector
+              key={stat}
+              stat={stat}
+              value={stats[stat]}
+              statPoints={statPoints}
+              setStatPoints={setStatPoints}
+              updateStat={updateStat}
+            />
+          ))}
+        </Col>
+      </Row>
+
       {/* Display points */}
       <div className="mb-3 text-center">
         <h4>
-          Поинты: <Badge bg="info">{points}</Badge>
+          Очки черт и изъянов: <Badge bg="info">{points}</Badge>
         </h4>
       </div>
 
       {/* Selected Characteristics */}
       <Row className="mb-4">
-        <h4>Выбранные характеристики</h4>
+        <h4>Выбранные черты</h4>
         {selected.length === 0 ? (
-          <p>Характеристик пока нет.</p>
+          <p>Черт пока нет.</p>
         ) : (
           <Row>
             {selected.map((char, index) => (

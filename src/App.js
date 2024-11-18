@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button, Card, Badge, Dropdown, DropdownButton } from "react-bootstrap";
-import { edges, flaws, powers, archetypes } from './Characteristics.js'; 
+import { edges, flaws } from './Characteristics.js'; 
+import { powers } from './Powers.js'; 
+import { archetypes } from './Archetypes.js'; 
 import "bootstrap/dist/css/bootstrap.min.css";
 import StatSelector from './StatSelector';
 import SkillSelector from './SkillSelector';
@@ -8,9 +10,9 @@ import SkillSelector from './SkillSelector';
 function App() {
   const [selected, setSelected] = useState([]);
   const [points, setPoints] = useState(0);
-  const [statPoints, setStatPoints] = useState(5); // Stat increase points
-  const [skillPoints, setSkillPoints] = useState(15); // Skill increase points
-  const [selectedArchetype, setSelectedArchetype] = useState(null); // For archetype selection
+  const [statPoints, setStatPoints] = useState(5);
+  const [skillPoints, setSkillPoints] = useState(15);
+  const [selectedArchetype, setSelectedArchetype] = useState(null);
 
   const [stats, setStats] = useState({
     Ловкость: "d4",
@@ -36,7 +38,7 @@ function App() {
     Запугивание: "d0",
     Лечение: "d0",
     "Магия (для Картёжников)": "d0",
-    "Маскировка (стелс, кражи етц)": "d0",
+    "Воровство (стелс, кражи етц)": "d0",
     Метание: "d0",
     "Общедоступные знания": "d0",
     "Специальные знания (сферы наук, языки, етц)": "d0",
@@ -55,7 +57,6 @@ function App() {
   const updateStat = (stat, newValue) => setStats({ ...stats, [stat]: newValue });
   const updateSkill = (skill, newValue) => setSkills({ ...skills, [skill]: newValue });
 
-  // Function to remove all skills at "d0"
   const removeUnusedSkills = () => {
     const filteredSkills = Object.keys(skills).reduce((result, skill) => {
       if (skills[skill] !== "d0") result[skill] = skills[skill];
@@ -91,6 +92,21 @@ function App() {
   // Handle selecting an archetype
   const handleArchetypeSelect = (archetype) => {
     setSelectedArchetype(archetype);
+
+    // Automatically select "Магический дар" for magical archetypes
+    const magicalArchetypes = ["Вудуист", "Слуга Господа", "Рунный стрелок", "Мастер искусства Ци", "Индеец-шаман", "Безумный учёный"];
+    if (magicalArchetypes.includes(archetype.name)) {
+      autoSelectMagicalEdge();
+    }
+  };
+
+  // Function to select "Магический дар" automatically for magical archetypes
+  const autoSelectMagicalEdge = () => {
+    const magicalEdge = edges.find((edge) => edge.name === "Магический дар");
+    if (magicalEdge && !selected.find((sel) => sel.name === "Магический дар")) {
+      setSelected([...selected, magicalEdge]);
+      setPoints(points - 2); // Deduct points for the edge
+    }
   };
 
   // Function to get color based on characteristic type
@@ -182,7 +198,7 @@ function App() {
       {/* Display points */}
       <div className="mb-3 text-center">
         <h4>
-          Очки черт и изъянов: <Badge bg="info">{points}</Badge>
+          Черты и изъяны
         </h4>
       </div>
 
@@ -260,7 +276,7 @@ function App() {
 
         {/* Powers */}
         <Col md={4} className="mb-5 px-md-4">
-          <h4 className="text-center">Силы</h4>
+          <h4 className="text-center">Силы (черта магический дар)</h4>
           <Row>
             {powers.map((char, index) => (
               <Col xs={6} md={6} lg={6} className="mb-3" key={index}>
